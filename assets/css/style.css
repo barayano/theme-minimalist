@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #e0e0e0;
+    position: relative;
+}
+
+.site-title {
+    font-family: 'Merriweather', 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.site-author {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.menu-toggle {
+    display: none; /* Скрыто по умолчанию */
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+    color: #333; /* Тёмный цвет для иконки */
+}
+
+.sidebar-nav {
+    padding: 20px;
+}
+
+.sidebar-nav li,
+.sidebar-nav li.nav-item {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.sidebar-nav a,
+.sidebar-nav a.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: block;
+    padding: 12px 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.nav-link:hover {
+    background-color: #b0b0b0;
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.sidebar-nav a:visited,
+.sidebar-nav a.nav-link:visited {
+    color: #333;
+}
+
+.sidebar-nav li.active a,
+.sidebar-nav li.nav-item.active a {
+    background-color: #666;
+    color: #fff;
+}
+
+.content {
+    margin-left: 300px;
+    padding: 20px;
+    flex: 1;
+}
+
+.page-content {
+    padding: 20px;
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    margin-left: 300px;
+    width: calc(100% - 300px);
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    z-index: 500;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Адаптивность */
+@media (max-width: 1920px) {
+    .sidebar { width: 250px; }
+    .content { margin-left: 250px; }
+    .footer { 
+        margin-left: 250px; 
+        width: calc(100% - 250px); 
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar { width: 200px; }
+    .content { margin-left: 200px; }
+    .footer { 
+        margin-left: 200px; 
+        width: calc(100% - 200px); 
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+        transform: translateX(-100%);
+    }
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    .content {
+        margin-left: 0;
+    }
+    .footer {
+        margin-left: 0;
+        width: 100%;
+    }
+    .menu-toggle {
+        display: block; /* Показываем кнопку */
+        background-color: #e0e0e0; /* Цвет фона, как у .sidebar-header */
+        color: #333; /* Цвет иконки */
+        padding: 8px 12px; /* Увеличенные отступы для красоты */
+        border: none; /* Убираем рамку */
+        border-radius: 12px; /* Скругленные углы */
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        font-size: 24px; /* Размер иконки */
+        line-height: 1; /* Убираем лишние отступы от шрифта */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Плавная анимация */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Лёгкая тень для глубины */
+    }
+    .menu-toggle:hover {
+        background-color: #b0b0b0; /* Цвет при наведении */
+        transform: scale(1.05); /* Лёгкое увеличение при наведении */
+    }
+    .menu-toggle:active {
+        transform: scale(0.95); /* Эффект нажатия */
+    }
+    /* Когда .sidebar не имеет класса .active (меню скрыто) */
+    .sidebar:not(.active) ~ .menu-toggle {
+        background-color: #f4f4f4; /* Более светлый фон, когда меню скрыто */
+        color: #666; /* Менее насыщенный цвет иконки */
+    }
+    .sidebar:not(.active) ~ .menu-toggle:hover {
+        background-color: #d0d0d0; /* Чуть темнее при наведении, но не так сильно */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-toggle {
+        padding: 6px 10px; /* Чуть меньше отступы на маленьких экранах */
+        top: 15px;
+        right: 15px;
+    }
+}
