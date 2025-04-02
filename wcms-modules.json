@@ -1,7 +1,7 @@
 {
     "version": 1,
     "themes": {
-        "theme-name": {
+        "theme-minimalist": {
             "name": "theme-minimalist",
             "repo": "https://github.com/barayano/theme-minimalist/tree/master",
             "zip": "https://github.com/barayano/theme-minimalist/archive/master.zip",
