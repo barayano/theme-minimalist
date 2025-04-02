@@ -84,16 +84,16 @@ body {
     overflow: hidden;
 }
 
+.sidebar-nav a:visited,
+.sidebar-nav a.nav-link:visited {
+    color: #333;
+}
+
 .sidebar-nav a:hover,
 .sidebar-nav a.nav-link:hover {
     background-color: #b0b0b0;
     color: #fff;
     transform: translateX(5px);
-}
-
-.sidebar-nav a:visited,
-.sidebar-nav a.nav-link:visited {
-    color: #333;
 }
 
 .sidebar-nav li.active a,
