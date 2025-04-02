@@ -20,7 +20,7 @@
     <!-- Подключаем Google Fonts (Lora) -->
     <link href='https://fonts.googleapis.com/css?family=Merriweather:300italic' rel='stylesheet' type='text/css'>
     
-    <link rel="stylesheet" href="<?= $Wcms->asset('assets/css/style.css') ?>?v=1.6">
+    <link rel="stylesheet" href="<?= $Wcms->asset('css/style.css') ?>?v=1.6">
     <?= $Wcms->css() ?>
 </head>
 <body>
@@ -51,7 +51,7 @@
             <?= $Wcms->footer() ?>
         </div>
     </footer>
-    <script src="<?php echo $Wcms->asset('assets/js/script.js'); ?>?v=1.1"></script>
+    <script src="<?php echo $Wcms->asset('js/script.js'); ?>?v=1.1"></script>
     <?php echo $Wcms->js(); ?>
 </body>
 </html>
