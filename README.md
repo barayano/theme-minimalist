@@ -4,7 +4,7 @@
 ## Author: barayano
 
 ## Preview
-![Theme preview](/preview.png)
+![Theme preview](/preview.jpg)
 
 ## How to use
 1. Login to your WonderCMS website.
