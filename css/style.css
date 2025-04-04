@@ -1,28 +1,78 @@
+/* Переменные для тем */
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --sidebar-bg: #e0e0e0;
+    --link-bg: #e0e0e0;
+    --link-hover-bg: #b0b0b0;
+    --link-active-bg: #666;
+    --content-bg: #fff;
+    --header-bg: #d0d0d0;
+    --theme-button-bg: #ccc;
+    --accent-color: #007bff;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --sidebar-bg: #2a2a2a;
+    --link-bg: #3a3a3a;
+    --link-hover-bg: #4a4a4a;
+    --link-active-bg: #5a5a5a;
+    --content-bg: #2a2a2a;
+    --header-bg: #3a3a3a;
+    --theme-button-bg: #4a4a4a;
+    --accent-color: #66b0ff;
+}
+
+/* Базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Убираем синее подсвечивание для всех кликабельных элементов */
+a, button, input, select, textarea {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* Кастомный стиль для фокуса (для доступности) */
+a:focus, button:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
+/* Стили для боковой панели */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
+    width: 350px; /* Увеличиваем на 50px (с 300px до 350px) */
     height: 100%;
-    background-color: #f4f4f4;
+    background-color: var(--sidebar-bg);
     border-right: 1px solid #ddd;
     transition: transform 0.3s ease;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar-header {
@@ -30,127 +80,310 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #e0e0e0;
+    background-color: var(--header-bg);
+    border-bottom: 2px solid #bbb;
     position: relative;
 }
 
 .site-title {
-    font-family: 'Merriweather', 'Georgia', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 640;
     line-height: 1.2;
 }
 
 .site-author {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #666;
     font-style: italic;
 }
 
-.menu-toggle {
-    display: none; /* Скрыто по умолчанию */
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1002;
-    color: #333; /* Тёмный цвет для иконки */
+.sidebar-nav {
+    padding: 0;
+    flex: 1;
 }
 
-.sidebar-nav {
-    padding: 20px;
+/* Убираем возможные отступы у вложенных элементов меню */
+.sidebar-nav ul {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .sidebar-nav li,
 .sidebar-nav li.nav-item {
     list-style: none;
-    margin: 10px 0;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Убираем отступы у первого элемента меню */
+.sidebar-nav li:first-child a {
+    margin-top: 0 !important;
+    padding-top: 12px !important;
 }
 
 .sidebar-nav a,
 .sidebar-nav a.nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
     font-size: 16px;
     display: block;
     padding: 12px 20px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    background-color: var(--link-bg);
+    border-radius: 0;
+    transition: background-color 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .sidebar-nav a:visited,
 .sidebar-nav a.nav-link:visited {
-    color: #333;
+    color: var(--text-color);
 }
 
 .sidebar-nav a:hover,
 .sidebar-nav a.nav-link:hover {
-    background-color: #b0b0b0;
+    background-color: var(--link-hover-bg);
     color: #fff;
-    transform: translateX(5px);
 }
 
 .sidebar-nav li.active a,
 .sidebar-nav li.nav-item.active a {
-    background-color: #666;
+    background-color: var(--link-active-bg);
     color: #fff;
 }
 
+/* Кнопка переключения темы внизу сайдбара */
+.sidebar-footer {
+    padding: 20px;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.theme-toggle {
+    padding: 8px 16px;
+    background-color: var(--theme-button-bg);
+    border: none;
+    border-radius: 7px !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--text-color);
+    box-shadow: none;
+}
+
+.theme-toggle:hover {
+    background-color: var(--link-hover-bg);
+    transform: scale(1.05);
+}
+
+.theme-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Кнопка бургер-меню */
+.menu-toggle {
+    display: none;
+    font-size: 20px;
+    background-color: var(--sidebar-bg);
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1002;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background-color: var(--link-hover-bg);
+    transform: scale(1.05);
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Состояние кнопки, когда меню закрыто */
+.sidebar:not(.active) ~ .menu-toggle {
+    background-color: var(--bg-color);
+    color: #666;
+}
+
+.sidebar:not(.active) ~ .menu-toggle:hover {
+    background-color: #d0d0d0;
+}
+
+/* Стили для контента */
 .content {
-    margin-left: 300px;
+    margin-left: 350px; /* Увеличиваем в соответствии с новым размером сайдбара */
     padding: 20px;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .page-content {
-    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+    padding: 30px;
+    background-color: var(--content-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Стили для заголовков */
+.page-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.page-content h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 2rem 0 1rem;
+    line-height: 1.3;
+}
+
+/* Стили для абзацев */
+.page-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Стили для списков */
+.page-content ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.page-content ul li {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    position: relative;
+}
+
+.page-content ul li::before {
+    content: "•";
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+}
+
+/* Стили для ссылок */
+.page-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.page-content a:hover {
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--accent-color);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для футера */
 .footer {
-    position: sticky;
-    bottom: 0;
-    margin-left: 300px;
-    width: calc(100% - 300px);
-    background-color: #f4f4f4;
+    background-color: var(--sidebar-bg);
     padding: 20px;
     border-top: 1px solid #ddd;
-    z-index: 500;
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 880px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
 
+/* Лоадер */
+.loader {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Затемнение фона */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+.sidebar.active ~ .overlay {
+    display: block;
+}
+
 /* Адаптивность */
-@media (max-width: 1920px) {
-    .sidebar { width: 250px; }
+@media (max-width: 1200px) {
+    .sidebar { width: 300px; } /* Увеличиваем на 50px (с 250px до 300px) */
+    .content { margin-left: 300px; }
+}
+
+@media (max-width: 900px) {
+    .sidebar { width: 250px; } /* Увеличиваем на 50px (с 200px до 250px) */
     .content { margin-left: 250px; }
-    .footer { 
-        margin-left: 250px; 
-        width: calc(100% - 250px); 
-    }
 }
 
-@media (max-width: 1024px) {
-    .sidebar { width: 200px; }
-    .content { margin-left: 200px; }
-    .footer { 
-        margin-left: 200px; 
-        width: calc(100% - 200px); 
-    }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .sidebar {
-        width: 250px;
+        width: 100%;
+        max-width: 200px; /* Увеличиваем на 50px (с 150px до 200px) */
         transform: translateX(-100%);
     }
     .sidebar.active {
@@ -159,47 +392,37 @@ body {
     .content {
         margin-left: 0;
     }
-    .footer {
-        margin-left: 0;
-        width: 100%;
-    }
     .menu-toggle {
-        display: block; /* Показываем кнопку */
-        background-color: #e0e0e0; /* Цвет фона, как у .sidebar-header */
-        color: #333; /* Цвет иконки */
-        padding: 8px 12px; /* Увеличенные отступы для красоты */
-        border: none; /* Убираем рамку */
-        border-radius: 12px; /* Скругленные углы */
+        display: block;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 9999;
-        font-size: 24px; /* Размер иконки */
-        line-height: 1; /* Убираем лишние отступы от шрифта */
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Плавная анимация */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Лёгкая тень для глубины */
-    }
-    .menu-toggle:hover {
-        background-color: #b0b0b0; /* Цвет при наведении */
-        transform: scale(1.05); /* Лёгкое увеличение при наведении */
-    }
-    .menu-toggle:active {
-        transform: scale(0.95); /* Эффект нажатия */
-    }
-    /* Когда .sidebar не имеет класса .active (меню скрыто) */
-    .sidebar:not(.active) ~ .menu-toggle {
-        background-color: #f4f4f4; /* Более светлый фон, когда меню скрыто */
-        color: #666; /* Менее насыщенный цвет иконки */
-    }
-    .sidebar:not(.active) ~ .menu-toggle:hover {
-        background-color: #d0d0d0; /* Чуть темнее при наведении, но не так сильно */
+        font-size: 20px;
+        line-height: 1;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 40px;
+        height: 40px;
     }
 }
 
 @media (max-width: 480px) {
     .menu-toggle {
-        padding: 6px 10px; /* Чуть меньше отступы на маленьких экранах */
         top: 15px;
         right: 15px;
+    }
+    .page-content h1 {
+        font-size: 2rem;
+    }
+    .page-content h2 {
+        font-size: 1.5rem;
+    }
+    .page-content p,
+    .page-content ul li {
+        font-size: 1rem;
     }
 }
