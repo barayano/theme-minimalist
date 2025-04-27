@@ -1,8 +1,8 @@
 {
     "version": 1,
     "themes": {
-        "theme-minimalist": {
-            "name": "theme-minimalist",
+        "minimalist": {
+            "name": "Minimalist",
             "repo": "https://github.com/barayano/theme-minimalist/tree/master",
             "zip": "https://github.com/barayano/theme-minimalist/archive/master.zip",
             "summary": "A clean theme with a minimalist design, responsive layout, and SPA functionality for seamless navigation.",
